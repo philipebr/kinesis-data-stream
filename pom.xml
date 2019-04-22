@@ -13,6 +13,7 @@
         <kinesis.producer.version>0.12.11</kinesis.producer.version>
         <aws.java.sdk.version>1.11.492</aws.java.sdk.version>
         <aws.java.sdk.kinesis.version>1.11.492</aws.java.sdk.kinesis.version>
+        <jaxb.version>2.3.1</jaxb.version>
     </properties>
 
     <dependencies>
@@ -33,6 +34,12 @@
             <version>${kinesis.producer.version}</version>
         </dependency>
 
+        <!-- To support java 9 modules structure -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
 
 
     </dependencies>
