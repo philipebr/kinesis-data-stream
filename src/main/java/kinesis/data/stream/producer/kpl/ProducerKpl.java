@@ -40,8 +40,6 @@ public class ProducerKpl {
             });
         });
 
-        this.producer.flushSync();
-        this.producer.destroy();
     }
 
     public void sendDataSync(List<String> dataList, String streamName, String partitionKey) throws ExecutionException, InterruptedException {
@@ -62,16 +60,12 @@ public class ProducerKpl {
                 }
             }
         }
-        this.producer.flushSync();
-        this.producer.destroy();
     }
 
     public void sendDataBarebones(List<String> dataList, String streamName, String partitionKey) {
         dataList.forEach( item ->{
             this.producer.addUserRecord(streamName, partitionKey, ByteBuffer.wrap(item.getBytes()));
         });
-        this.producer.flushSync();
-        this.producer.destroy();
     }
 
 }
