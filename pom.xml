@@ -52,7 +52,6 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>11</release>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
