@@ -45,7 +45,8 @@ public class ProducerKpl {
     public void sendDataSync(List<String> dataList, String streamName, String partitionKey) throws ExecutionException, InterruptedException {
         List<Future<UserRecordResult>> putFutures = new LinkedList<>();
         dataList.forEach( item ->{
-            this.producer.addUserRecord(streamName, partitionKey, ByteBuffer.wrap(item.getBytes()));
+            ListenableFuture<UserRecordResult> future = this.producer.addUserRecord(streamName, partitionKey, ByteBuffer.wrap(item.getBytes()));
+            putFutures.add(future);
         });
         for (Future<UserRecordResult> f : putFutures) {
             UserRecordResult result = f.get(); // this does block
