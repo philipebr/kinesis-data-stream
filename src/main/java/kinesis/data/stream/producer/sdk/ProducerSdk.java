@@ -1,9 +1,12 @@
+package kinesis.data.stream.producer.sdk;
+
 import com.amazonaws.services.kinesis.AmazonKinesis;
 import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder;
 import com.amazonaws.services.kinesis.model.PutRecordsRequest;
 import com.amazonaws.services.kinesis.model.PutRecordsRequestEntry;
 import com.amazonaws.services.kinesis.model.PutRecordsResult;
 import com.amazonaws.services.kinesis.model.PutRecordsResultEntry;
+import kinesis.data.stream.AwsConfiguration;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -17,15 +20,8 @@ public class ProducerSdk {
         this.awsConfiguration = awsConfiguration;
     }
 
-    private AmazonKinesis getAmazonKinesis() {
-        AmazonKinesisClientBuilder clientBuilder = AmazonKinesisClientBuilder.standard()
-                .withRegion(this.awsConfiguration.getRegion().getName())
-                .withCredentials(this.awsConfiguration.getCredentialProvider());
-        return clientBuilder.build();
-    }
-
     public void sendDataToStream(String streamName) {
-        AmazonKinesis amazonKinesis = getAmazonKinesis();
+        AmazonKinesis amazonKinesis = this.awsConfiguration.getKinesis();
         PutRecordsRequest putRecordsRequest  = new PutRecordsRequest();
         putRecordsRequest.setStreamName(streamName);
         List<PutRecordsRequestEntry> putRecordsRequestEntryList = new ArrayList<>();
